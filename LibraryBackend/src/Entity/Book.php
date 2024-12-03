@@ -6,6 +6,7 @@ use App\Model\BookDto;
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 #[ORM\Table(name: "book", uniqueConstraints: [
@@ -19,11 +20,13 @@ class Book
     private int $id;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 3, minMessage: 'Title is too short.')]
     #[Assert\Length(max: 255, maxMessage: 'Title is too long.')]
     private string $title;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 3, minMessage: 'Author name is too short.')]
     #[Assert\Length(max: 255, maxMessage: 'Author name is too long.')]
     private string $author;
@@ -36,11 +39,7 @@ class Book
     private string $isbn;
 
     #[ORM\Column]
-    #[Assert\Range(
-        min: 1900,
-        max: 'now',
-        notInRangeMessage: 'The year must be between {{min}} and {{max}}.'
-    )]
+    #[CustomAssert\PublicationYear]
     private int $yearOfPublication;
 
     public function __construct(BookDto $bookDto) {
@@ -50,56 +49,48 @@ class Book
         $this->setYearOfPublication($bookDto->yearOfPublication);
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): static
+    public function setAuthor(string $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 
-    public function getIsbn(): ?string
+    public function getIsbn(): string
     {
         return $this->isbn;
     }
 
-    public function setIsbn(string $isbn): static
+    public function setIsbn(string $isbn): void
     {
         $this->isbn = $isbn;
-
-        return $this;
     }
 
-    public function getYearOfPublication(): ?int
+    public function getYearOfPublication(): int
     {
         return $this->yearOfPublication;
     }
 
-    public function setYearOfPublication(int $yearOfPublication): static
+    public function setYearOfPublication(int $yearOfPublication): void
     {
         $this->yearOfPublication = $yearOfPublication;
-
-        return $this;
     }
 }

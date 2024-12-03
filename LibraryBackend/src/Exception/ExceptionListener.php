@@ -14,7 +14,7 @@ class ExceptionListener
         $exception = $event->getThrowable();
 
         $statusCode = 500;
-        $message = 'An unexpected error occurred.';
+        $message = $exception->getMessage();
 
         if ($exception instanceof BadBookException || $exception instanceof HttpExceptionInterface) {
             $statusCode = $exception->getStatusCode();

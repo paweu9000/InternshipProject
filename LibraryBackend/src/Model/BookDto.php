@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
 
 class BookDto
 {
@@ -19,11 +20,7 @@ class BookDto
             message: 'The ISBN must be either 10 or 13 digits long.'
         )]
         public readonly string $isbn,
-        #[Assert\Range(
-            min: 1900,
-            max: 'now',
-            notInRangeMessage: 'The year must be between {{min}} and {{max}}.'
-        )]
+        #[CustomAssert\PublicationYear]
         public readonly int $yearOfPublication
     ){}
 }
