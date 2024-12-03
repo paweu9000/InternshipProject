@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Book;
 
 #[Route('/api/book', 'BookController')]
 class BookController extends AbstractController
@@ -25,6 +26,17 @@ class BookController extends AbstractController
     {
         $book = $this->bookService->saveBook($bookDto);
         return $this->json($book);
+    }
+
+    #[Route(path: '/{id}', name: 'update_book', methods: ['PUT'])]
+    public function updateBook(
+        #[MapRequestPayload] BookDto $bookDto,
+        int $id
+    ): JsonResponse
+    {
+        $updatedBook = $this->bookService->updateBook($bookDto, $id);
+
+        return $this->json($updatedBook);
     }
 
     #[Route(name: 'get_all_books', methods: ['GET'])]

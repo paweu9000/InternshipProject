@@ -16,6 +16,10 @@ class BookService
     }
 
     public function saveBook(BookDto $bookDto): Book {
+        if ($bookDto->yearOfPublication < 1900 || $bookDto->yearOfPublication > (int)date("Y") ) {
+            throw new BadBookException("The year must be between 1900 and current year");
+        }
+        
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('
             COUNT(b.id) AS totalBooks,
@@ -65,5 +69,26 @@ class BookService
         $books = $this->entityManager->getRepository(Book::class)->findAll();
 
         return $books;
+    }
+
+    public function updateBook(BookDto $bookDto, int $id): Book {
+        if ($bookDto->yearOfPublication < 1900 || $bookDto->yearOfPublication > (int)date("Y") ) {
+            throw new BadBookException("The year must be between 1900 and current year");
+        }
+        $bookToUpdate = $this->entityManager->find(Book::class, $id);
+        if ($bookToUpdate) {
+            $bookToUpdate->setAuthor( $bookDto->author);
+            $bookToUpdate->setIsbn( $bookDto->isbn);
+            $bookToUpdate->setYearOfPublication( $bookDto->yearOfPublication);
+            $bookToUpdate->setTitle( $bookDto->title);
+
+            $this->entityManager->persist($bookToUpdate);
+            $this->entityManager->flush();
+
+            return $bookToUpdate;
+        }
+        else {
+            throw new BadBookException("Book with provided id doesn't exist");
+        }
     }
 }
