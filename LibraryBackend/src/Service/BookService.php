@@ -5,7 +5,6 @@ use App\Entity\Book;
 use App\Exception\BadBookException;
 use App\Model\BookDto;
 use Doctrine\ORM\EntityManagerInterface;
-use RuntimeException;
 
 class BookService
 {
@@ -16,10 +15,6 @@ class BookService
     }
 
     public function saveBook(BookDto $bookDto): Book {
-        if ($bookDto->yearOfPublication < 1900 || $bookDto->yearOfPublication > (int)date("Y") ) {
-            throw new BadBookException("The year must be between 1900 and current year");
-        }
-        
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('
             COUNT(b.id) AS totalBooks,
@@ -72,9 +67,6 @@ class BookService
     }
 
     public function updateBook(BookDto $bookDto, int $id): Book {
-        if ($bookDto->yearOfPublication < 1900 || $bookDto->yearOfPublication > (int)date("Y") ) {
-            throw new BadBookException("The year must be between 1900 and current year");
-        }
         $bookToUpdate = $this->entityManager->find(Book::class, $id);
         if ($bookToUpdate) {
             $bookToUpdate->setAuthor( $bookDto->author);
