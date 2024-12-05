@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/api/book', 'BookApiController')]
+#[Route('/api/book')]
 class BookRestController extends AbstractController
 {
     private BookService $bookService;

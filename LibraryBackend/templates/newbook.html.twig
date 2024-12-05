@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const data = "{{ url(api_endpoint) }}";
+</script>
+<script src="{{ asset('js/error.js')}}"></script>
+<script src="{{ asset('js/newbook.js')}}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="uk-flex uk-flex-center uk-margin-large">
+    <form id="book-form" class="uk-form-horizontal uk-margin-large">
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Title</label>
+            <div class="uk-form-controls">
+            <input
+                class="uk-input"
+                id="book-title"
+                minlength="3"
+                maxlength="255"
+                type="text"
+                placeholder="Title"
+                required
+            />
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Author</label>
+            <div class="uk-form-controls">
+            <input
+                class="uk-input"
+                id="book-author"
+                minlength="3"
+                maxlength="255"
+                type="text"
+                placeholder="Author"
+                required
+            />
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">ISBN</label>
+            <div class="uk-form-controls">
+            <input
+                class="uk-input"
+                minlength="10"
+                maxlength="13"
+                id="book-isbn"
+                type="text"
+                placeholder="ISBN"
+                required
+            />
+            </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Year of publication</label>
+            <div class="uk-form-controls">
+            <input
+                class="uk-input"
+                min="1900"
+                id="book-yearOfPublication"
+                type="number"
+                placeholder="i.e. 1987"
+                required
+            />
+            </div>
+        </div>
+        <button class="uk-button uk-button-default" type="submit">Add</button>
+    </form>
+</div>
+{% endblock %}
