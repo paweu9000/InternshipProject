@@ -18,16 +18,14 @@ class BookController extends AbstractController
         ]);
     }
 
-    //TODO: 
-    //View books, add book, query books, delete books
-
     #[Route('/all', 'all_books')]
     public function allBooks(): Response {
         $pageTitle = 'All Books';
 
         return $this->render('allbooks.html.twig', [
             'title' => $pageTitle,
-            'api_endpoint' => 'get_all_books'
+            'api_endpoint' => 'get_all_books',
+            'base_book_endpoint' => 'find_book_by_id'
         ]);
     }
 
@@ -37,7 +35,19 @@ class BookController extends AbstractController
 
         return $this->render('newbook.html.twig', [
             'title' => $pageTitle,
-            'api_endpoint' => 'add_book'
+            'api_endpoint' => 'add_book',
+            'success_url' => 'get_book_by_id'
+        ]);
+    }
+
+    #[Route('/{id}', 'get_book_by_id', requirements: ['id' => '\d+'])]
+    public function getBookById(int $id) {
+        $pageTitle = "Book no. " . $id;
+
+        return $this->render('book.html.twig', [
+            'title' => $pageTitle,
+            'book_id' => $id,
+            'api_endpoint' => 'find_book_by_id'
         ]);
     }
 }

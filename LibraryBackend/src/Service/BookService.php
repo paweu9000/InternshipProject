@@ -67,20 +67,22 @@ class BookService
     }
 
     public function updateBook(BookDto $bookDto, int $id): Book {
-        $bookToUpdate = $this->entityManager->find(Book::class, $id);
-        if ($bookToUpdate) {
-            $bookToUpdate->setAuthor( $bookDto->author);
-            $bookToUpdate->setIsbn( $bookDto->isbn);
-            $bookToUpdate->setYearOfPublication( $bookDto->yearOfPublication);
-            $bookToUpdate->setTitle( $bookDto->title);
+        $bookToUpdate = $this->findById($id);
 
-            $this->entityManager->persist($bookToUpdate);
-            $this->entityManager->flush();
+        $bookToUpdate->setAuthor( $bookDto->author);
+        $bookToUpdate->setIsbn( $bookDto->isbn);
+        $bookToUpdate->setYearOfPublication( $bookDto->yearOfPublication);
+        $bookToUpdate->setTitle( $bookDto->title);
 
-            return $bookToUpdate;
-        }
-        else {
-            throw new BadBookException("Book with provided id doesn't exist");
-        }
+        $this->entityManager->persist($bookToUpdate);
+        $this->entityManager->flush();
+
+        return $bookToUpdate;
+    }
+
+    public function findById(int $id) {
+        $book = $this->entityManager->find(Book::class, $id);
+        if (!$book) throw new BadBookException("Book with provided id doesn't exist");
+        return $book;
     }
 }

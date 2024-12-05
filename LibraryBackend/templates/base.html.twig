@@ -4,12 +4,7 @@
         <meta charset="UTF-8">
         <title>Library | {% block title %}Error{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/franken-ui@1.1.0/dist/css/core.min.css"
-        />
-        <script src="https://unpkg.com/franken-ui@1.1.0/dist/js/core.iife.js" type="module"></script>
-        <script src="https://unpkg.com/franken-ui@1.1.0/dist/js/icon.iife.js" type="module"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         {% block stylesheets %}
         {% endblock %}
 
@@ -17,24 +12,25 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="uk-navbar-container">
-            <div class="uk-container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
                 <div uk-navbar>
-                    <div class="uk-navbar-left">
-                        <a class="uk-navbar-item uk-logo" href="{{ path('index') }}" aria-label="Back to Home"
-                        >Library</a
-                        >
-
-                        <div class="uk-navbar-item">
-                            <div>
-                                <a href="{{ path('all_books') }}">All books</a>
-                            </div>
-                        </div>
-                        <div class="uk-navbar-item">
-                            <div>
-                                <a href="{{ path('new_book') }}">Add new book</a>
-                            </div>
-                        </div>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('index') }}" aria-label="Back to Home">Library</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('all_books') }}" aria-label="View books">All books</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('new_book') }}" aria-label="Add new book">Add new book</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
