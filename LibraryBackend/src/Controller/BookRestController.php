@@ -18,6 +18,13 @@ class BookRestController extends AbstractController
         $this->bookService = $bookService;
     }
 
+    #[Route(path: '/{id}', name: 'find_book_by_id', methods: ['GET'])]
+    public function findById(int $id): JsonResponse {
+        $book = $this->bookService->findById($id);
+
+        return $this->json($book);
+    }
+
     #[Route(name: 'add_book', methods: ['POST'])]
     public function addBook(
         #[MapRequestPayload] BookDto $bookDto

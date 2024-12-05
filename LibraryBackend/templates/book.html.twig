@@ -10,15 +10,21 @@
 
 {% block javascripts %}
 <script>
-    const data = "{{ url(api_endpoint) }}";
-    const singleBookEndpoint = "{{ path('get_book_by_id', {id: 0}) }}";
+    const data = "{{ url(api_endpoint, {id: book_id}) }}";
 </script>
-<script src="{{ asset('js/allbooks.js')}}"></script>
+<script src="{{ asset('js/error.js')}}"></script>
+<script src="{{ asset('js/fetchbook.js')}}"></script>
 {% endblock %}
 
 {% block body %}
 <div class="position-relative">
-    <div id="books" class="position-absolute top-0 start-50">
+    <div id="book" class="position-absolute top-0 start-50">
     </div>
 </div>
 {% endblock %}
+
+{# 
+TODO:
+    DELETING, EDITING, BETTER ERRORS
+
+ #}

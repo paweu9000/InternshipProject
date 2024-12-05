@@ -21,10 +21,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
+            console.log(data);
             if (data.error) {
                 showError(data.error);
             } else {
-                console.log(data);
+                const redirect = successURL.replace('/0', '/'+ data.id.toString());
+                window.location.replace(redirect);
             }
         })
         .catch(error => {

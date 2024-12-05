@@ -1,10 +1,21 @@
 function bookCard(book) {
-    return ` <div id="book-${book.id}" class="uk-card uk-card-body card-secondary uk-align-center" style="max-width: 20%; margin: 1%">
-            <h3 class="uk-card-title">Title: ${book.title}</h3>
-            <p class="uk-margin">Author: ${book.author}</p>
-            <p class="uk-margin">ISBN: ${book.isbn}</p>
-            <p class="uk-margin">Year of publication: ${book.yearOfPublication}</p>
-        </div>
+    const dynamicUrl = singleBookEndpoint.replace('/0', book.id);
+
+    return ` 
+                <div id="book-${book.id}" class="card" style="width: 30rem; margin: 1%;">
+                    <div class="card-body">
+                        <h3 class="card-title">Title: ${book.title}</h3>
+                        <p class="card-text">Author: ${book.author}</p>
+                        <p class="card-text">ISBN: ${book.isbn}</p>
+                        <p class="card-text">Year of publication: ${book.yearOfPublication}</p>
+                    
+                        <a href="${dynamicUrl}">
+                            <button class="btn btn-primary">
+                                View
+                            </button>
+                        </a>
+                    </div>
+                </div>
         `
 }
 

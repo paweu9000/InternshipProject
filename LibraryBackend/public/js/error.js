@@ -10,10 +10,15 @@ function showError(data) {
 
 function createErrorCard(error) {
     return `
-        <div class="uk-card uk-card-danger" style='background-color: red'>
-            <p class="uk-margin">
-                ${error}
-            </p>
+        <div class="card text-bg-warning mb-3" style='max-width: 22rem;'>
+            <div class="card-header">
+                Error
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    ${error}
+                </p>
+            </div>
         </div>
     `
 }
