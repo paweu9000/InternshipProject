@@ -7,11 +7,11 @@ use App\Validator as CustomAssert;
 class BookDto
 {
     public function __construct(
-        #[Assert\NotBlank]
+        #[Assert\NotBlank(message: 'Title cannot be blank')]
         #[Assert\Length(min: 3, minMessage: 'Title is too short.')]
         #[Assert\Length(max: 255, maxMessage: 'Title is too long.')]
         public readonly string $title,
-        #[Assert\NotBlank]
+        #[Assert\NotBlank(message: 'Author cannot be blank')]
         #[Assert\Length(min: 3, minMessage: 'Title is too short.')]
         #[Assert\Length(max: 255, maxMessage: 'Title is too long.')]
         public readonly string $author,

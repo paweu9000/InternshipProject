@@ -5,7 +5,6 @@ namespace App\Exception;
 use App\Exception\BadBookException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class ExceptionListener
 {
@@ -13,10 +12,10 @@ class ExceptionListener
     {
         $exception = $event->getThrowable();
 
-        $statusCode = 500;
+        $statusCode = 400;
         $message = $exception->getMessage();
 
-        if ($exception instanceof BadBookException || $exception instanceof HttpExceptionInterface) {
+        if ($exception instanceof BadBookException) {
             $statusCode = $exception->getStatusCode();
             $message = $exception->getMessage();
         }

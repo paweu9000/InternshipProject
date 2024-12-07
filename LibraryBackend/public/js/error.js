@@ -8,10 +8,14 @@ function showError(data) {
     document.getElementById('errors').innerHTML = errorCards;
 }
 
+function clearErrors() {
+    document.getElementById('errors').innerHTML = '';
+} 
+
 function createErrorCard(error) {
     return `
-        <div class="card text-bg-warning mb-3" style='max-width: 22rem;'>
-            <div class="card-header">
+        <div class="card text-bg-warning mb-3 row justify-content-center">
+            <div class="card-header ">
                 Error
             </div>
             <div class="card-body">

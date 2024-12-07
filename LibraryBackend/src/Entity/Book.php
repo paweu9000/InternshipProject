@@ -20,13 +20,13 @@ class Book
     private int $id;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Title cannot be blank')]
     #[Assert\Length(min: 3, minMessage: 'Title is too short.')]
     #[Assert\Length(max: 255, maxMessage: 'Title is too long.')]
     private string $title;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(message: 'Author cannot be blank')]
     #[Assert\Length(min: 3, minMessage: 'Author name is too short.')]
     #[Assert\Length(max: 255, maxMessage: 'Author name is too long.')]
     private string $author;
