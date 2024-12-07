@@ -47,7 +47,10 @@ class BookController extends AbstractController
         return $this->render('book.html.twig', [
             'title' => $pageTitle,
             'book_id' => $id,
-            'api_endpoint' => 'find_book_by_id'
+            'api_endpoint' => 'find_book_by_id',
+            'delete_redirect' => 'index',
+            'delete_endpoint' => 'delete_book',
+            'edit_endpoint' => 'update_book'
         ]);
     }
 }

@@ -3,3 +3,9 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+non_existent_route:
+    path: /{url}
+    controller: App\Controller\BookController::index
+    requirements:
+        url: .+
