@@ -96,6 +96,7 @@ function attachEventListeners() {
         fetch(delete_endpoint, {
             method: "DELETE",
             headers: {
+                'Authorization': `Bearer ${jwt}`,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => {
@@ -135,6 +136,7 @@ function attachEventListeners() {
                 method: "PUT",
                 body: JSON.stringify(bookDto),
                 headers: {
+                    'Authorization': `Bearer ${jwt}`,
                     "Content-type": "application/json; charset=UTF-8"
                 }
             }).then(response => {
@@ -160,7 +162,12 @@ function attachEventListeners() {
 document.addEventListener('DOMContentLoaded', function() {
     const url = data;
 
-    fetch(url).then(response => {
+    fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
         if (response.status === 400) {
             window.location.replace(delete_redirect);
         }

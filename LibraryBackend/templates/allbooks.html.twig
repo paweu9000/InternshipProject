@@ -8,6 +8,7 @@
 <script>
     const data = "{{ url(api_endpoint) }}";
     const singleBookEndpoint = "{{ path('get_book_by_id', {id: 0}) }}";
+    const jwt = "{{token}}";
 </script>
 <script src="{{ asset('js/allbooks.js')}}"></script>
 {% endblock %}

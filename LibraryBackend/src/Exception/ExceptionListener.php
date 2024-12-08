@@ -15,7 +15,7 @@ class ExceptionListener
         $statusCode = 400;
         $message = $exception->getMessage();
 
-        if ($exception instanceof BadBookException) {
+        if ($exception instanceof BadBookException || $exception instanceof UnauthorizedRequestException) {
             $statusCode = $exception->getStatusCode();
             $message = $exception->getMessage();
         }
