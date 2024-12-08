@@ -69,7 +69,13 @@ function applyQuery(book, field, query) {
 document.addEventListener('DOMContentLoaded', function() {
     const url = data;
 
-    fetch(url).then(response => {
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${jwt}`,
+            'Content-Type': 'application/json',
+        }
+    }).then(response => {
         if (!response.ok) {
             throw new Error("Response not ok");
         }

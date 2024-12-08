@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
             method: "POST",
             body: JSON.stringify(bookDto),
             headers: {
+                'Authorization': `Bearer ${jwt}`,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             if (data.error) {
                 showError(data.error);
             } else {

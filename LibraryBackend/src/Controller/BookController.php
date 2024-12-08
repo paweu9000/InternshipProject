@@ -2,19 +2,27 @@
 
 namespace App\Controller;
 
+use App\Service\JWTService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class BookController extends AbstractController
 {
+    private JWTService $jwtService;
+
+    public function __construct(JWTService $jwtService) {
+        $this->jwtService = $jwtService;
+    }
+
     #[Route('/', 'index')]
     public function index(): Response {
         $pageTitle = 'Homepage';
 
         return $this->render('index.html.twig', [
             'title' => $pageTitle,
-            'content' => 'Index'
+            'content' => 'Index',
+            'token' => $this->jwtService->generateToken()
         ]);
     }
 
@@ -25,7 +33,8 @@ class BookController extends AbstractController
         return $this->render('allbooks.html.twig', [
             'title' => $pageTitle,
             'api_endpoint' => 'get_all_books',
-            'base_book_endpoint' => 'find_book_by_id'
+            'base_book_endpoint' => 'find_book_by_id',
+            'token' => $this->jwtService->generateToken()
         ]);
     }
 
@@ -36,7 +45,8 @@ class BookController extends AbstractController
         return $this->render('newbook.html.twig', [
             'title' => $pageTitle,
             'api_endpoint' => 'add_book',
-            'success_url' => 'get_book_by_id'
+            'success_url' => 'get_book_by_id',
+            'token' => $this->jwtService->generateToken()
         ]);
     }
 
@@ -50,7 +60,8 @@ class BookController extends AbstractController
             'api_endpoint' => 'find_book_by_id',
             'delete_redirect' => 'index',
             'delete_endpoint' => 'delete_book',
-            'edit_endpoint' => 'update_book'
+            'edit_endpoint' => 'update_book',
+            'token' => $this->jwtService->generateToken()
         ]);
     }
 }
