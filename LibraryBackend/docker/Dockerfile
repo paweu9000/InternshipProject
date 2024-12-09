@@ -38,6 +38,7 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash \
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html/var /var/www/html/public /var/www/html/config/jwt
 
 # Expose the PHP service port
 EXPOSE 9000
