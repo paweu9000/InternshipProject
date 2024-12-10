@@ -1,11 +1,41 @@
-# InternshipProject
+
+# Library
+
+
+
+
+## Description
+
+A web app that allows users to add, edit and delete books. User can also view all books and sort them by the criteria provided in the filters. The app is secured with JWT token that is generated for each subpage.
+
+
+
+## How to run
+Clone the project and enter the project directory.
+```
 git clone https://github.com/paweu9000/InternshipProject.git
 
-# Run in terminal
 cd LibraryBackend
-mkdir config/jwt
+```
+Start docker if it's not running yet,
+then run appropriate setup script depending on Your OS.
 
-# Generate private key for jwt token
-openssl genpkey -algorithm RSA -out config/jwt/private.pem -pkeyopt rsa_keygen_bits:2048 && openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
-
-docker compose up
+**Linux**
+```
+./setup.zsh
+```
+**Windows**
+```
+./setup.ps1
+```
+## Requirements
+```
+PHP 8+
+Symfony 7+
+Docker
+SSL (its needed to generate keys that jwt library will use)
+```
+## Technologies used:
+```
+PHP, Symfony, Twig, Javascript, HTML, CSS, Bootstrap, Docker
+```
